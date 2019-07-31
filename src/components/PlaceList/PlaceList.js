@@ -1,11 +1,13 @@
 import React from 'react';
 import {View,StyleSheet} from 'react-native';
-import ListItem from '../ListItem/ListItem.js';
+import ListItem from '../ListItem/ListItem';
 
-const placeList = props =>{
+const PlaceList = props =>{
 	// to output the places array using map function
     const placesOutput = props.places.map((place,i) => (
-        <ListItem key={i} placeName={place}/>
+        <ListItem 
+        	key={i} placeName={place} 
+        	onItemPressed={()=>props.onItemDeleted(i)}/>
     ));
 	return(
 		<View style={styles.listContainer}>
@@ -20,4 +22,4 @@ const styles = StyleSheet.create({
   	}
 }
 );
-export default PlaceList
+export default PlaceList;

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput,Button } from 'react-native';
 import ListItem from "./src/components/ListItem/ListItem.js";
 import PlaceInput from "./src/components/PlaceInput/PlaceInput.js"
 import PlaceList from "./src/components/PlaceList/PlaceList"
-
+import placeImage from './src/assets/me.jpg';
 export default class App extends Component {
   state = {
     placeName:' ',
@@ -22,19 +22,30 @@ export default class App extends Component {
     this.setState(prevState => {
         return{
           // concat to pervious state places
-            places : prevState.places.concat(placeName)
+          // image object is stores in image of the state places
+            places : prevState.places.concat({
+              key: Math.random(),
+              name:placeName,
+              image: placeImage
+              /*
+                to get from web
+                image: {
+                  url: "url of picture";
+                }
+              */
+            })
         };
     });
   }
 
-  placeDeletedHandler = index =>{
+  placeDeletedHandler = key =>{
     this.setState(prevState=>{
       return{
 
         //return false if index passed is equal to i
         //filter returns new array satisfying specific criteria
-        places: prevState.places.filter((place,i)=>{
-          return i !== index;
+        places: prevState.places.filter((place)=>{
+          return place.key !== key;
         })
       }
     })

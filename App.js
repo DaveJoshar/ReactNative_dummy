@@ -4,10 +4,12 @@ import ListItem from "./src/components/ListItem/ListItem.js";
 import PlaceInput from "./src/components/PlaceInput/PlaceInput.js"
 import PlaceList from "./src/components/PlaceList/PlaceList"
 import placeImage from './src/assets/me.jpg';
+import PlaceDetail from './src/components/PlaceDetail/PlaceDetail'
 export default class App extends Component {
   state = {
     placeName:' ',
-    places:[]
+    places:[],
+    selectedPlace:null
   }
   // // to handle or take text input in textInput
   // placeNameChangedHandler = (val)=>{
@@ -27,39 +29,59 @@ export default class App extends Component {
               key: Math.random(),
               name:placeName,
               image: placeImage
-              /*
-                to get from web
-                image: {
-                  url: "url of picture";
-                }
-              */
+              
+               //  // to get from web
+               // image: {
+               //   uri: "url of picture";
+               //  }
+              
             })
         };
     });
   }
+// to delete when taped
+  // placeDeletedHandler = key =>{
+  //   this.setState(prevState=>{
+  //     return{
 
-  placeDeletedHandler = key =>{
-    this.setState(prevState=>{
-      return{
+  //       //return false if index passed is equal to i
+  //       //filter returns new array satisfying specific criteria
+  //       places: prevState.places.filter((place)=>{
+  //         return place.key !== key;
+  //       })
+  //     }
+  //   })
+  // }
+  placeSelectedHandler = key =>{
+      this.setState(prevState =>{
+        return
+        {
+          selectedPlace: prevState.places.find(place=>{
+            return place.key === key;
+          });
+        };
 
-        //return false if index passed is equal to i
-        //filter returns new array satisfying specific criteria
-        places: prevState.places.filter((place)=>{
-          return place.key !== key;
-        })
-      }
-    })
-  }
+      });
+  };
+
   render(){
 
   return (
     <View style={styles.container}>
-      <PlaceInput onPlaceAdded={this.placeAddedHandler}/>
-      <PlaceList places={this.state.places} 
-                onItemDeleted={this.placeDeletedHandler}
-      />
+        <PlaceDetail
+            selectedPlace ={this.state.selectedPlace}
+        />
+        
+        <PlaceInput 
+            onPlaceAdded={this.placeAddedHandler}
+        />
+        
+        <PlaceList 
+            places={this.state.places} 
+            onItemSelected={this.placeSelectedHandler}
+        />
     </View>
-  );
+  )
 }}
 
 const styles = StyleSheet.create({

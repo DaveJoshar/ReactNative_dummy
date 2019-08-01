@@ -19,12 +19,12 @@ const PlaceList = props =>{
 		        		placeName={info.item.name}
 		        		placeImage={info.item.image}
 		        		keys={info.item.key}
-		        		onItemPressed={()=>props.onItemDeleted(info.item.key)}
+		        		onItemPressed={()=>props.onItemSelected(info.item.key)}
         			/>
 				)}
 		/>
-	);
-};
+	)
+}
 
 const styles = StyleSheet.create({
 	listContainer:{

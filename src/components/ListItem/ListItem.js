@@ -5,11 +5,10 @@ import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
 const listItem =(props) =>{
 	//view doesnot have onPress prop
 	// TOuchable can only have one child which could be view with text or text only
-
+	// here image resize mode is by default cover
 	return(
 		<TouchableOpacity onPress={props.onItemPressed}>
 			<View style={styles.listItem} >
-				// here image resize mode is by default cover
 				<Image resizeMode="contain" style={styles.placeImage} source={props.placeImage}/>
 				<Text>{props.placeName}</Text>
 			</View>

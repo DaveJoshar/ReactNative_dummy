@@ -5,7 +5,7 @@ const PlaceDetail = props =>{
 	if(props.selectedPlace){
 		modalContent = (
 			<View>
-				<Image source={props.selectedPlace.image}/>
+				<Image style={styles.imageContainer} source={props.selectedPlace.image}/>
 				<Text>
 					{props.selectedPlace.name}
 				</Text>
@@ -14,14 +14,13 @@ const PlaceDetail = props =>{
 	}
 
 	return(
-		<Modal visible={props.selectedPlace!==null} animationType="fade">
+		<Modal onRequestClose = {props.onModalClosed} visible={props.selectedPlace!==null} animationType="slide">
 
 			<View style={styles.modalContainer}>
 				{modalContent}
 				<View>
-					<Button title="delete" color="red"/>
-
-					<Button title="Close"/>
+					<Button title="delete" color="red" onPress={props.onItemDeleted}/>
+					<Button title="Close" onPress={props.onModalClosed}/>
 				</View>
 			</View>
 		</Modal>
@@ -34,6 +33,14 @@ const PlaceDetail = props =>{
 const styles = StyleSheet.create({
 	modalContainer:{
 		margin:30
+	},
+	imageContainer:{
+		width:'100%',
+		height:200
+	},
+	placeName:{
+		fontWeight: 'bold',
+		textAlign:'center'
 	}
 });
 export default PlaceDetail;

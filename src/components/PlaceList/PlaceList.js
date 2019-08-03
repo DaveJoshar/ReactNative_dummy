@@ -9,9 +9,10 @@ const PlaceList = props =>{
     //     	key={i} placeName={place} 
     //     	onItemPressed={()=>props.onItemDeleted(i)}/>
     // ));
+    // data prop define what data it is going to render
+	// without data list is not render
 	return(
-		// data prop define what data it is going to render
-		// without data list is not render
+		
 		<FlatList style={styles.listContainer}
 				data={props.places}
 				renderItem={(info)=>(

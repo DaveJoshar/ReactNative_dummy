@@ -40,28 +40,31 @@ export default class App extends Component {
     });
   }
 // to delete when taped
-  // placeDeletedHandler = key =>{
-  //   this.setState(prevState=>{
-  //     return{
-
-  //       //return false if index passed is equal to i
-  //       //filter returns new array satisfying specific criteria
-  //       places: prevState.places.filter((place)=>{
-  //         return place.key !== key;
-  //       })
-  //     }
-  //   })
-  // }
-  placeSelectedHandler = key =>{
-      this.setState(prevState =>{
-        return
-        {
-          selectedPlace: prevState.places.find(place=>{
+  placeDeletedHandler = () => {
+    //return false if index passed is equal to i
+    //filter returns new array satisfying specific criteria
+    this.setState(prevState => {
+      return{
+        places: prevState.places.filter(place => {
+          return place.key !== prevState.selectedPlace.key;
+        }),
+        selectedPlace:null
+      }
+    });
+  }
+  modalClosedHandler = () =>{
+    this.setState({
+      selectedPlace:null
+    });
+  }
+  placeSelectedHandler = key => {
+      this.setState(prevState => {
+        return{
+          selectedPlace:prevState.places.find(place =>{
             return place.key === key;
-          });
+          })
         };
-
-      });
+      });   
   };
 
   render(){
@@ -70,13 +73,15 @@ export default class App extends Component {
     <View style={styles.container}>
         <PlaceDetail
             selectedPlace ={this.state.selectedPlace}
+            onItemDeleted = {this.placeDeletedHandler}
+            onModalClosed = {this.modalClosedHandler}
         />
         
         <PlaceInput 
             onPlaceAdded={this.placeAddedHandler}
         />
         
-        <PlaceList 
+        <PlaceList  
             places={this.state.places} 
             onItemSelected={this.placeSelectedHandler}
         />

@@ -12,10 +12,10 @@ export default class placeInput extends Component{
 	    });
 	    
 	  };
-
+	  // if empty none is returned
 	  placeSubmitHandler = () =>{
 	    if(this.state.placeName.trim() === ""){
-	      // if empty none is returned
+	      
 	      return;
 	    }
 	    this.props.onPlaceAdded(this.state.placeName);
